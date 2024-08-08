@@ -1,31 +1,33 @@
 import React from 'react';
 import { useGlobalContext } from './context';
+import { NavLink } from "react-router-dom";
 
-// Composant Movies qui affiche une liste de films en utilisant les données fournies par le contexte global
 function Movies() {
-  // Utilisation du hook personnalisé useGlobalContext pour accéder aux films depuis le contexte global
   const { movie } = useGlobalContext();
 
   return (
     <>
-      {/* Boucle sur l'ensemble des films récupérés et rend un élément pour chacun */}
-      {movie.map((curMovie) => {
-        return (
-          <div key={curMovie.id} className="movie-item">
-            {/* Affiche le titre du film */}
-            <h2>{curMovie.title}</h2>
-            {/* Affiche la catégorie du film */}
-            <p>Category: {curMovie.category}</p>
-            {/* Affiche le nombre de likes du film */}
-            <p>Likes: {curMovie.likes}</p>
-            {/* Affiche le nombre de dislikes du film */}
-            <p>Dislikes: {curMovie.dislikes}</p>
-          </div>
-        );
-      })}
+      <section className='movie-page'>
+        <div className='grid grid-4-col'>
+          {movie.map((curMovie) => {
+            const { id, title, category, likes, dislikes } = curMovie;
+            return (
+              <NavLink to={`movie/${id}`} key={id}>
+                <div className='card'>
+                  <div className='card-info'>
+                    <h2>{title}</h2>
+                    <p>Category: {category}</p>
+                    <p>Likes: {likes}</p>
+                    <p>Dislikes: {dislikes}</p>
+                  </div>
+                </div>
+              </NavLink>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }
 
 export default Movies;
-
