@@ -9,18 +9,20 @@ const AppProvider = ({ children }) => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isError, setIsError] = useState({ show: false, msg: "" });
   const [query, setQuery] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
 
   const getMovies = async () => {
     try {
       const data = await movies$;
       setMovies(data);
-      setFilteredMovies(data); 
+      setFilteredMovies(data);
+      const uniqueCategories = [...new Set(data.map(movie => movie.category))];
+      setCategories(uniqueCategories);
       setIsLoading(false);
     } catch (error) {
-      setIsError({
-        show: false,
-        msg: "",
-      });
+      setIsError({ show: true, msg: "An error occurred while fetching data." });
       console.log(error);
     }
   };
@@ -34,18 +36,18 @@ const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    let filtered = movies;
     if (query) {
-      const filtered = movies.filter((movie) =>
-        movie.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredMovies(filtered);
-    } else {
-      setFilteredMovies(movies);
+      filtered = filtered.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase()));
     }
-  }, [query, movies]);
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(movie => selectedCategories.includes(movie.category));
+    }
+    setFilteredMovies(filtered);
+  }, [query, selectedCategories, movies]);
 
   return (
-    <AppContext.Provider value={{ isLoading, isError, movies: filteredMovies, setMovies, query, setQuery }}>
+    <AppContext.Provider value={{ isLoading, isError, movies: filteredMovies, setMovies, query, setQuery, categories,selectedCategories, setSelectedCategories }}>
       {children}
     </AppContext.Provider>
   );

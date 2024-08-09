@@ -239,6 +239,20 @@ a:hover img {
   background-color: #FF4500;
 }
 
+.category-filter {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.filter-options label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.filter-options input {
+  margin-right: 0.5rem;
+}
+
 /* responsive code   */
 @media (max-width: 1200px) {
   .container {
