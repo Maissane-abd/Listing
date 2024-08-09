@@ -224,6 +224,20 @@ a:hover img {
   margin-right: 0.5rem;
 }
 
+.delete-button {
+  margin-top: 1rem;
+  background-color: #FF6347;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.delete-button:hover {
+  background-color: #FF4500;
+}
 
 /* responsive code   */
 @media (max-width: 1200px) {

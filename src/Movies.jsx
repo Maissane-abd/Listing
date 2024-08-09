@@ -8,6 +8,11 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 function Movies() {
   const { movies, isLoading } = useGlobalContext();
 
+  const handleDelete = (id) => {
+    const updatedMovies = movies.filter(movie => movie.id !== id);
+    setMovies(updatedMovies);
+  };
+
   if (isLoading) {
     return (
     <div className='movie-section'>
@@ -39,11 +44,16 @@ function Movies() {
                     <FontAwesomeIcon icon={faThumbsDown} /> {dislikes}
                   </button>
                 </div>
+                <button className="delete-button" onClick={() => handleDelete(id)}>
+                  Delete
+                </button>
                 </div>
               </div>
             </NavLink>
           );
+          
         })}
+        
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ const AppProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isError, setIsError] = useState({ show: false, msg: "" });
-  const [query, setQuery] = useState("pulp");
+  const [query, setQuery] = useState("");
 
   const getMovies = async () => {
     try {
@@ -45,7 +45,7 @@ const AppProvider = ({ children }) => {
   }, [query, movies]);
 
   return (
-    <AppContext.Provider value={{ isLoading, isError, movies: filteredMovies, query, setQuery }}>
+    <AppContext.Provider value={{ isLoading, isError, movies: filteredMovies, setMovies, query, setQuery }}>
       {children}
     </AppContext.Provider>
   );
