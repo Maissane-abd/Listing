@@ -1,8 +1,32 @@
-# React + Vite
+# Projet Frontend - Listing de Vidéos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Ce projet liste des films avec une interface utilisateur réactive. Les utilisateurs peuvent filtrer par catégorie, aimer/détester les films, supprimer des cartes de films, et naviguer à travers les pages.
 
-Currently, two official plugins are available:
+## Installation
+1. Clonez le dépôt :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   git clone [URL_DU_DEPOT]
+
+2. Accédez au répertoire du projet :
+
+cd Listing
+
+3. Installez les dépendances :
+
+npm install
+
+## Exécution
+1. Lancez le serveur de développement :
+
+npm start
+
+2. Ouvrez http://localhost:3000 dans votre navigateur.
+
+## Fonctionnalités
+
+- Liste des films avec filtre par catégorie
+- Boutons pour aimer/détester et supprimer les films
+- Pagination et choix du nombre d'éléments par page
+
+![Capture d'écran du projet](image.png)
