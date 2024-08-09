@@ -1,12 +1,19 @@
 import React from 'react';
 import { useGlobalContext } from './context';
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+
 
 function Movies() {
   const { movies, isLoading } = useGlobalContext();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+    <div className='movie-section'>
+      <div className='loading'>Loading...</div>
+      </div>
+    );
   }
 
   if (movies.length === 0) {
@@ -22,10 +29,16 @@ function Movies() {
             <NavLink to={`movie/${id}`} key={id}>
               <div className='card'>
                 <div className='card-info'>
-                  <h2>{title}</h2>
+                  <h2><strong>{title}</strong></h2>
                   <p>Category: {category}</p>
-                  <p>Likes: {likes}</p>
-                  <p>Dislikes: {dislikes}</p>
+                  <div className="like-dislike-buttons">
+                  <button onClick={() => handleLike(id)}>
+                    <FontAwesomeIcon icon={faThumbsUp} /> {likes}
+                  </button>
+                  <button onClick={() => handleDislike(id)}>
+                    <FontAwesomeIcon icon={faThumbsDown} /> {dislikes}
+                  </button>
+                </div>
                 </div>
               </div>
             </NavLink>

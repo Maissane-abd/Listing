@@ -18,15 +18,19 @@ const AppProvider = ({ children }) => {
       setIsLoading(false);
     } catch (error) {
       setIsError({
-        show: true,
-        msg: "An error occurred while fetching data.",
+        show: false,
+        msg: "",
       });
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getMovies();
+    let timerOut = setTimeout(()=>{
+        getMovies();
+    }, 300);
+    return ()=> clearTimeout(timerOut);
+    
   }, []);
 
   useEffect(() => {
