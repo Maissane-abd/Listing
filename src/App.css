@@ -19,13 +19,15 @@ html {
 
 body {
   background-color: var(--bg-clr);
+  color: var(--text-clr);
 }
 
 h2 {
   font-family: "Lora", serif;
   color: var(--text-clr);
   font-size: 2rem;
-  transition: all 0.5s linear;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
 }
 
 a {
@@ -33,78 +35,109 @@ a {
 }
 
 img {
-  /* width: 25rem; */
-  min-width: 10rem;
+  width: 100%;
   max-height: 30rem;
-  margin: 1rem 0;
   border-radius: 1rem;
-  transition: all 0.3s linear;
+  transition: transform 0.3s ease;
 }
 
 .container {
   max-width: 140rem;
   margin: auto;
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .grid {
-  /* width: 100%; */
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
+  padding: 0 3rem; /* Ajout de marge horizontale */
 }
 
 .grid-4-col {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
 
 .card {
-  width: 25rem;
-  max-width: 30rem;
-  min-height: 30rem;
-  /* background-color: #fafaff; */
-  /* padding: 2rem; */
+  background-color: #ffffff;
+  border: 1px solid var(--border-clr);
   border-radius: 1rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* search css  */
-.search-section {
-  margin: auto;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 16px;
+}
+
+.card-info {
   text-align: center;
-  margin: 4rem 0;
+}
+
+.like-dislike-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.like-dislike-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--text-clr);
+  transition: color 0.3s ease;
+}
+
+.like-dislike-buttons button:hover {
+  color: #007BFF;
+}
+
+.delete-button {
+  background-color: #FF6347;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #FF4500;
+}
+
+.search-section {
+  text-align: center;
+  margin: 3rem 0;
 }
 
 input {
-  width: 30rem;
+  width: 100%;
+  max-width: 30rem;
   border-radius: 100px;
-  border: none;
   border: 1px solid var(--border-clr);
   padding: 1rem 2rem;
   font-size: 1.8rem;
-  /* border-color: var(--border-clr); */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   outline: none;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .card-error p {
   color: red;
   margin-top: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
-/* Single Movie css code  */
-
 .movie-section {
-  width: 100%;
-  height: 100vh;
-  background-color: var(--text-clr);
   display: grid;
   place-items: center;
+  height: 100vh;
 }
 
 .loading {
@@ -113,144 +146,37 @@ input {
   text-align: center;
 }
 
-.movie-section .loading {
-  font-size: 3.2rem;
-  color: var(--bg-clr);
-  text-align: center;
-}
-
 .movie-card {
-  min-width: 30rem;
-  width: 50vw;
-  /* padding: 1rem; */
-  background-color: var(--bg-clr);
   display: grid;
-  gap: 2rem;
-  grid-template-columns: 0.6fr 1fr;
-  /* align-items: center; */
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 2rem;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 2fr;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+  padding: 1.5rem;
 }
 
-figure {
-  margin: 0;
-  padding: 0;
-}
 .movie-card img {
-  width: 100%;
+  border-radius: 1rem;
+  object-fit: cover;
   height: 100%;
-  margin: 0;
-  border-radius: 0;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
-  /* border-radius: 0; */
-  max-height: 50rem;
-  height: auto;
 }
 
 .movie-card .title {
-  font-size: 2.8rem;
+  font-size: 2rem;
   color: var(--text-clr);
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .card-content {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
   gap: 1rem;
 }
 
 .card-text {
-  font-size: 1.8rem;
-}
-
-a {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  padding: 3.2rem 1rem;
-  /* background-color: var(--text-clr); */
-  color: var(--text-clr);
-  border: 0.2rem solid var(--text-clr);
-  font-size: 1.8rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s linear;
-}
-
-a:hover {
-  background-color: var(--text-clr);
-  color: var(--bg-clr);
-}
-
-a:hover h2 {
-  color: var(--bg-clr);
-  transform: translateY(-1.5rem);
-  display: inline-block;
-}
-
-a:hover img {
-  transform: scale(1.1);
-}
-
-.back-btn {
-  padding: 1.2rem 3.6rem;
-}
-
-.like-dislike-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-}
-
-.like-dislike-buttons button {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #333;
-}
-
-.like-dislike-buttons button:hover {
-  color: #007BFF;
-}
-
-.like-dislike-buttons .faThumbsUp,
-.like-dislike-buttons .faThumbsDown {
-  margin-right: 0.5rem;
-}
-
-.delete-button {
-  margin-top: 1rem;
-  background-color: #FF6347;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.delete-button:hover {
-  background-color: #FF4500;
-}
-
-.category-filter {
-  margin: 2rem 0;
-  text-align: center;
-}
-
-.filter-options label {
-  display: block;
-  margin: 0.5rem 0;
-}
-
-.filter-options input {
-  margin-right: 0.5rem;
+  font-size: 1.6rem;
 }
 
 .pagination {
@@ -258,10 +184,11 @@ a:hover img {
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
+  gap: 1rem;
 }
 
-.pagination button {
-  margin: 0 0.5rem;
+.pagination button,
+.pagination select {
   padding: 0.5rem 1rem;
   font-size: 1.6rem;
   border: none;
@@ -269,6 +196,7 @@ a:hover img {
   color: var(--bg-clr);
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .pagination button:disabled {
@@ -278,8 +206,6 @@ a:hover img {
 
 .pagination select {
   margin-right: 1rem;
-  padding: 0.5rem;
-  font-size: 1.6rem;
 }
 
 .pagination .active {
@@ -288,33 +214,42 @@ a:hover img {
   color: #fff;
 }
 
-/* responsive code   */
+.category-filter {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-options label {
+  margin: 0.5rem 0;
+}
+
+.filter-options input {
+  margin-right: 0.5rem;
+}
+
 @media (max-width: 1200px) {
   .container {
-    margin: auto;
     max-width: 110rem;
-  }
-  .grid-4-col {
-    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media (max-width: 998px) {
   .container {
     max-width: 90rem;
-    margin: auto;
   }
+
   .grid-4-col {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   }
 
   input {
-    width: 25rem;
-  }
-
-  .movie-section {
-    height: auto;
-    padding: 4.8rem 0;
+    max-width: 25rem;
   }
 
   .movie-card {
@@ -333,9 +268,9 @@ a:hover img {
 @media (max-width: 768px) {
   .container {
     max-width: 70rem;
-    margin: auto;
   }
+
   .grid-4-col {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); /* Ajustement pour les petits écrans */
   }
 }
