@@ -29,4 +29,4 @@ npm start
 - Boutons pour aimer/détester et supprimer les films
 - Pagination et choix du nombre d'éléments par page
 
-![Capture d'écran du projet](image.png)
+![alt text](image.png)
