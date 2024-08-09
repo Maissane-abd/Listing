@@ -233,6 +233,8 @@ input {
   margin-right: 0.5rem;
 }
 
+
+
 @media (max-width: 1200px) {
   .container {
     max-width: 110rem;

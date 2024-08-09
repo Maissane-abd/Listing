@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { movies$ } from "../Etude-de-cas-front-movies-data"; 
+import { movies$ } from "../Etude-de-cas-front-movies-data";
 
 const AppContext = React.createContext();
 
@@ -17,8 +17,13 @@ const AppProvider = ({ children }) => {
   const getMovies = async () => {
     try {
       const data = await movies$;
-      setMovies(data);
-      setFilteredMovies(data);
+      const moviesWithStates = data.map(movie => ({
+        ...movie,
+        likedByUser: false,
+        dislikedByUser: false,
+      }));
+      setMovies(moviesWithStates);
+      setFilteredMovies(moviesWithStates);
       const uniqueCategories = [...new Set(data.map(movie => movie.category))];
       setCategories(uniqueCategories);
       setIsLoading(false);
@@ -29,10 +34,10 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    let timerOut = setTimeout(()=>{
-        getMovies();
+    let timerOut = setTimeout(() => {
+      getMovies();
     }, 300);
-    return ()=> clearTimeout(timerOut);
+    return () => clearTimeout(timerOut);
   }, []);
 
   useEffect(() => {
@@ -56,12 +61,42 @@ const AppProvider = ({ children }) => {
     setCurrentPage(1);  // Reset to first page when items per page changes
   };
 
+  const toggleLike = (id) => {
+    setMovies(prevMovies =>
+      prevMovies.map(movie =>
+        movie.id === id
+          ? {
+              ...movie,
+              likedByUser: !movie.likedByUser,
+              likes: !movie.likedByUser ? movie.likes + 1 : movie.likes - 1
+            }
+          : movie
+      )
+    );
+  };
+  
+  const toggleDislike = (id) => {
+    setMovies(prevMovies =>
+      prevMovies.map(movie =>
+        movie.id === id
+          ? {
+              ...movie,
+              dislikedByUser: !movie.dislikedByUser,
+              dislikes: !movie.dislikedByUser ? movie.dislikes + 1 : movie.dislikes - 1
+            }
+          : movie
+      )
+    );
+  };
+  
+  
+
   return (
     <AppContext.Provider value={{
       isLoading,
       isError,
       movies: currentMovies,
-      filteredMovies,  // Provide filteredMovies here
+      filteredMovies,
       setMovies,
       query,
       setQuery,
@@ -72,7 +107,9 @@ const AppProvider = ({ children }) => {
       setCurrentPage,
       itemsPerPage,
       handleItemsPerPageChange,
-      paginate
+      paginate,
+      toggleLike,
+      toggleDislike,
     }}>
       {children}
     </AppContext.Provider>

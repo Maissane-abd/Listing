@@ -4,21 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 function Movies() {
-  const { movies, setMovies, isLoading } = useGlobalContext();
-
-  const handleLike = (id) => {
-    const updatedMovies = movies.map(movie => 
-      movie.id === id ? { ...movie, likes: movie.likes + 1 } : movie
-    );
-    setMovies(updatedMovies);
-  };
-
-  const handleDislike = (id) => {
-    const updatedMovies = movies.map(movie => 
-      movie.id === id ? { ...movie, dislikes: movie.dislikes + 1 } : movie
-    );
-    setMovies(updatedMovies);
-  };
+  const { movies, toggleLike, toggleDislike, isLoading, setMovies } = useGlobalContext();
 
   const handleDelete = (id) => {
     const updatedMovies = movies.filter(movie => movie.id !== id);
@@ -41,17 +27,23 @@ function Movies() {
     <section className='movie-page'>
       <div className='grid grid-4-col'>
         {movies.map((curMovie) => {
-          const { id, title, category, likes, dislikes } = curMovie;
+          const { id, title, category, likes, dislikes, likedByUser, dislikedByUser } = curMovie;
           return (
             <div className='card' key={id}>
               <div className='card-info'>
                 <h2><strong>{title}</strong></h2>
                 <p>Category: {category}</p>
                 <div className="like-dislike-buttons">
-                  <button onClick={() => handleLike(id)}>
+                  <button
+                    onClick={() => toggleLike(id)}
+                    className={likedByUser ? 'active' : ''}
+                  >
                     <FontAwesomeIcon icon={faThumbsUp} /> {likes}
                   </button>
-                  <button onClick={() => handleDislike(id)}>
+                  <button
+                    onClick={() => toggleDislike(id)}
+                    className={dislikedByUser ? 'active' : ''}
+                  >
                     <FontAwesomeIcon icon={faThumbsDown} /> {dislikes}
                   </button>
                 </div>
