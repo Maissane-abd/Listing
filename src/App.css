@@ -253,6 +253,41 @@ a:hover img {
   margin-right: 0.5rem;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.pagination button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  border: none;
+  background-color: var(--text-clr);
+  color: var(--bg-clr);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination select {
+  margin-right: 1rem;
+  padding: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.pagination .active {
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+}
+
 /* responsive code   */
 @media (max-width: 1200px) {
   .container {

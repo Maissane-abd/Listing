@@ -11,7 +11,8 @@ const AppProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
   const getMovies = async () => {
     try {
@@ -32,7 +33,6 @@ const AppProvider = ({ children }) => {
         getMovies();
     }, 300);
     return ()=> clearTimeout(timerOut);
-    
   }, []);
 
   useEffect(() => {
@@ -46,8 +46,34 @@ const AppProvider = ({ children }) => {
     setFilteredMovies(filtered);
   }, [query, selectedCategories, movies]);
 
+  const indexOfLastMovie = currentPage * itemsPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - itemsPerPage;
+  const currentMovies = filteredMovies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handleItemsPerPageChange = (e) => {
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1);  // Reset to first page when items per page changes
+  };
+
   return (
-    <AppContext.Provider value={{ isLoading, isError, movies: filteredMovies, setMovies, query, setQuery, categories,selectedCategories, setSelectedCategories }}>
+    <AppContext.Provider value={{
+      isLoading,
+      isError,
+      movies: currentMovies,
+      filteredMovies,  // Provide filteredMovies here
+      setMovies,
+      query,
+      setQuery,
+      categories,
+      selectedCategories,
+      setSelectedCategories,
+      currentPage,
+      setCurrentPage,
+      itemsPerPage,
+      handleItemsPerPageChange,
+      paginate
+    }}>
       {children}
     </AppContext.Provider>
   );
